@@ -5,7 +5,7 @@ export default async function getLocationForecast(
 
   try {
     const forecast = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=3&aqi=no&alerts=no`,
+      `https://api.weatherapi.com/v1/forecast.json?key=${  apiKey  }&q=${  location  }&days=3&aqi=no&alerts=no`, {mode: "cors"},
     )
       .then((response) => response.json())
       .then((response) => response.forecast.forecastday);

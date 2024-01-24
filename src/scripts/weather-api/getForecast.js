@@ -12,7 +12,6 @@ export default async function getLocationForecast(
       return forecast;
   }
   catch(error) {
-    console.log(error);
     return null;
   }
 }

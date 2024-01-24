@@ -1,0 +1,127 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+:root {
+  --mariner-50: #f1f7fe;
+  --mariner-100: #e2edfc;
+  --mariner-200: #bdd9fa;
+  --mariner-300: #83bbf6;
+  --mariner-400: #4298ee;
+  --mariner-500: #1771cc;
+  --mariner-600: #0c5fbd;
+  --mariner-700: #0b4c99;
+  --mariner-800: #0d417f;
+  --mariner-900: #113869;
+  --mariner-950: #0b2346;
+
+  --fonts: "Roboto",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  font-family: var(--fonts);
+}
+
+.active.day, #stats {
+  background-color: var(--mariner-300);
+}
+
+#content-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--mariner-200);
+}
+
+#header {
+  font-size: 4rem;
+  height: 15%;
+  margin-top: 12px;
+}
+
+#days-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.4rem;
+  padding: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  flex: 1;
+}
+
+.day-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.day img {
+  width: 80%;
+  height: auto;
+}
+
+.condition {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+#stats {
+  display: grid;
+  position: relative;
+  z-index: 2;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  flex: 1 1;
+  width: 100vw;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  gap: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+.stat :first-child {
+  font-size: 1.6rem;
+}
+
+.stat::after {
+  position: absolute;
+  z-index: -1;
+  width: 175px;
+  height: 175px;
+  background-color: var(--mariner-600);
+  content: "";
+  border-radius: 10px;
+}
+
+#max-temp, #rain-chance {
+  margin-bottom: -100px;
+}
+
+#mean-temp, #rain-amount {
+  margin-top: -50px;;
+}

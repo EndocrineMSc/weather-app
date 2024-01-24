@@ -16,7 +16,7 @@
   --mariner-900: #113869;
   --mariner-950: #0b2346;
 
-  --fonts: "Roboto",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --fonts: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -28,7 +28,8 @@ body {
   font-family: var(--fonts);
 }
 
-.active.day, #stats {
+.active.day,
+#stats {
   background-color: var(--mariner-300);
 }
 

@@ -1,7 +1,7 @@
-export default function(rawForecast) {
+export default function (rawForecast) {
   if (rawForecast) {
     const forecasts = [];
-    rawForecast.forEach(day => {
+    rawForecast.forEach((day) => {
       forecasts.push(day.day);
     });
     return forecasts;

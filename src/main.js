@@ -11,8 +11,29 @@ const rainChanceDiv = document.getElementById("rain-chance");
 const meanTempDiv = document.getElementById("mean-temp");
 const rainAmountDiv = document.getElementById("rain-amount");
 
-const WEEKDAYS = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
-const MONTHS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+const WEEKDAYS = [
+  "Sonntag",
+  "Montag",
+  "Dienstag",
+  "Mittwoch",
+  "Donnerstag",
+  "Freitag",
+  "Samstag",
+];
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mär",
+  "Apr",
+  "Mai",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Okt",
+  "Nov",
+  "Dez",
+];
 
 if (processedForecast) {
   setDays(processedForecast);
@@ -42,26 +63,24 @@ function setDays(forecasts) {
 
     const conditionImage = new Image();
     conditionImage.src = forecasts[i].condition.icon;
-    
+
     const conditionText = dateDiv.nextElementSibling;
     conditionText.textContent = forecasts[i].condition.text;
     dayDiv.insertBefore(conditionImage, conditionText);
 
-    dayDiv.addEventListener("click", event => {
-      Array.from(days).forEach(div => {
+    dayDiv.addEventListener("click", (event) => {
+      Array.from(days).forEach((div) => {
         if (div === event.target.parentElement) {
           div.classList.add("active");
           setForecastDetails(event.target.parentElement.dataset.dayIndex);
-        }
-        else if (div === event.target) {
+        } else if (div === event.target) {
           div.classList.add("active");
           setForecastDetails(event.target.dataset.dayIndex);
-        } 
-        else {
+        } else {
           div.classList.remove("active");
         }
       });
-    })
+    });
   }
 }
 

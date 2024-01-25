@@ -2,14 +2,14 @@ import "./style.css";
 import getForecast from "./scripts/weather-api/getForecast";
 import processForecast from "./scripts/weather-api/processForecast";
 
-const rawForecast = await getForecast();
-const processedForecast = processForecast(rawForecast);
-
+const locationInput = document.getElementById("header");
 const days = document.getElementsByClassName("day");
 const maxTempDiv = document.getElementById("max-temp");
 const rainChanceDiv = document.getElementById("rain-chance");
 const meanTempDiv = document.getElementById("mean-temp");
 const rainAmountDiv = document.getElementById("rain-amount");
+const DEFAULT_LOCATION = "39.474275,2.830115" // Son Atem Mallorca
+const DEFAULT_LOCATION_NAME = "Son Atem";
 
 const WEEKDAYS = [
   "Sonntag",
@@ -35,14 +35,28 @@ const MONTHS = [
   "Dez",
 ];
 
-if (processedForecast) {
-  setDays(processedForecast);
-  setForecastDetails(0);
+locationInput.addEventListener("change", event => {updateForecast(event)});
+
+async function updateForecast(data) {
+  const rawForecast = data ? await getForecast(data.target.value) : await getForecast(DEFAULT_LOCATION);
+  const processedForecast = processForecast(rawForecast);
+
+  if (processedForecast) {
+    setDays(processedForecast);
+    setForecastDetails(processedForecast, 0);
+    locationInput.value = data ? data.target.value : DEFAULT_LOCATION_NAME;
+  }
 }
 
 function setDays(forecasts) {
   for (let i = 0; i < forecasts.length; i++) {
     const dayDiv = days[i];
+
+    const oldImage = dayDiv.getElementsByTagName("img")[0];
+    if (oldImage) {
+      oldImage.remove();
+    }
+
     dayDiv.dataset.dayIndex = i;
 
     const currentDay = new Date();
@@ -72,10 +86,10 @@ function setDays(forecasts) {
       Array.from(days).forEach((div) => {
         if (div === event.target.parentElement) {
           div.classList.add("active");
-          setForecastDetails(event.target.parentElement.dataset.dayIndex);
+          setForecastDetails(forecasts, event.target.parentElement.dataset.dayIndex);
         } else if (div === event.target) {
           div.classList.add("active");
-          setForecastDetails(event.target.dataset.dayIndex);
+          setForecastDetails(forecasts, event.target.dataset.dayIndex);
         } else {
           div.classList.remove("active");
         }
@@ -84,10 +98,12 @@ function setDays(forecasts) {
   }
 }
 
-function setForecastDetails(dayIndex) {
+function setForecastDetails(processedForecast, dayIndex) {
   const forecast = processedForecast[dayIndex];
   maxTempDiv.lastElementChild.textContent = `${forecast.maxtemp_c}°C`;
   rainChanceDiv.lastElementChild.textContent = `${forecast.daily_chance_of_rain}%`;
   meanTempDiv.lastElementChild.textContent = `${forecast.avgtemp_c}°C`;
   rainAmountDiv.lastElementChild.textContent = `${forecast.totalprecip_mm} mm`;
 }
+
+updateForecast();

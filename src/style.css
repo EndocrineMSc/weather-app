@@ -58,6 +58,10 @@ body {
   background-color: inherit;
 }
 
+.invalid {
+  outline: 2px solid red;
+}
+
 #days-container {
   display: flex;
   justify-content: space-around;

@@ -45,6 +45,10 @@ async function updateForecast(data) {
     setDays(processedForecast);
     setForecastDetails(processedForecast, 0);
     locationInput.value = data ? data.target.value : DEFAULT_LOCATION_NAME;
+    locationInput.classList.remove("invalid");
+  }
+  else {
+    locationInput.classList.add("invalid");
   }
 }
 

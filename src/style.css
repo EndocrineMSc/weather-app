@@ -85,7 +85,9 @@ body {
 }
 
 .day img {
-  width: 80%;
+  min-width: 60px;
+  max-width: 80px;
+  width: max(60px, 80%, 80px);
   height: auto;
 }
 
